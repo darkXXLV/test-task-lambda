@@ -8,11 +8,11 @@ resource "aws_lb" "justForTesting" {
 
   enable_deletion_protection = true
 
-  # access_logs {
-  #   bucket  = aws_s3_bucket.lblogs.bucket
-  #   prefix  = "test-lb"
-  #   enabled = true
-  # }
+  access_logs {
+    bucket  = aws_s3_bucket.lblogs.bucket
+    prefix  = "test-lb-tf"
+    enabled = true
+  }
 
   tags = {
     Environment = "production"

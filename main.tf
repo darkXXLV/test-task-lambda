@@ -23,6 +23,11 @@ resource "aws_iam_role_policy" "nuTevJastrada" {
   role = aws_iam_role.iam_for_lambda.id
   policy = file("ec2_policy.json")
 }
+resource "aws_iam_role_policy" "cloudwatch_logs" {
+  name = "cloudwatch"
+  role = aws_iam_role.iam_for_lambda.id
+  policy = file("ec2_policy.json")
+}
 # resource "aws_lambda_layer_version" "lambda_layer" {
 #   filename   = "python.zip"
 #   layer_name = "terraLayer"

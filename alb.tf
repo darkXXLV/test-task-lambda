@@ -3,10 +3,10 @@ resource "aws_lb" "justForTesting" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb_sg.id]
-  subnets            = ["subnet-028177bc4b27450dc", "subnet-0591ab2bf707ce98c"]
+  subnets            = [aws_subnet.main.id, aws_subnet.main2.id]
 
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   access_logs {
     bucket  = aws_s3_bucket.lblogs.bucket

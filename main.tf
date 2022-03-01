@@ -26,7 +26,7 @@ resource "aws_iam_role_policy" "nuTevJastrada" {
 resource "aws_iam_role_policy" "cloudwatch_logs" {
   name = "cloudwatch"
   role = aws_iam_role.iam_for_lambda.id
-  policy = file("ec2_policy.json")
+  policy = file("cloudwatch_logs.json")
 }
 # resource "aws_lambda_layer_version" "lambda_layer" {
 #   filename   = "python.zip"
@@ -53,7 +53,7 @@ resource "aws_lambda_function" "test_lambda" {
   
   vpc_config {
     # subnet-028177bc4b27450dc, subnet-0591ab2bf707ce98c
-    subnet_ids = tolist(["subnet-028177bc4b27450dc", "subnet-0591ab2bf707ce98c"])
+    subnet_ids = tolist([aws_subnet.main.id, aws_subnet.main2.id])
     security_group_ids = [aws_security_group.lb_sg.id]
   }
 

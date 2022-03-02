@@ -51,6 +51,24 @@ resource "aws_main_route_table_association" "route_table_a" {
   vpc_id         = aws_vpc.main.id
   route_table_id = aws_default_route_table.route_table.id
 }
+
+# resource "aws_eip" "eip" {
+#   vpc      = true
+# }
+
+# resource "aws_nat_gateway" "nat_gateway" {
+#   allocation_id = aws_eip.eip.id
+#   subnet_id     = aws_subnet.main.id
+
+#   tags = {
+#     Name = "gw NAT"
+#   }
+
+#   # To ensure proper ordering, it is recommended to add an explicit dependency
+#   # on the Internet Gateway for the VPC.
+#   depends_on = [aws_internet_gateway.gateway]
+# }
+
 # resource "aws_network_acl" "main" {
 #   vpc_id = aws_vpc.main.id
 #   default = true

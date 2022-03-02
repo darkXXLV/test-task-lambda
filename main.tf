@@ -36,12 +36,11 @@ resource "aws_iam_role_policy" "vpc_exec_role" {
   policy = file("vpc_exec_role.json")
 }
 
-# resource "aws_lambda_layer_version" "lambda_layer" {
-#   filename   = "python.zip"
-#   layer_name = "terraLayer"
-
-#   compatible_runtimes = ["python3.9"]
-# }
+resource "aws_iam_role_policy" "s3_lambda_policy" {
+  name = "s3_lambda_policy"
+  role = aws_iam_role.iam_for_lambda.id
+  policy = file("s3_lambda_poilcy.json")
+}
 
 resource "aws_lambda_function" "test_lambda" {
   depends_on = [
@@ -60,11 +59,11 @@ resource "aws_lambda_function" "test_lambda" {
   publish          = true
 
   
-  vpc_config {
-    # subnet-028177bc4b27450dc, subnet-0591ab2bf707ce98c
-    subnet_ids = tolist([aws_subnet.main.id, aws_subnet.main2.id])
-    security_group_ids = [aws_security_group.lb_sg.id]
-  }
+  # vpc_config {
+  #   # subnet-028177bc4b27450dc, subnet-0591ab2bf707ce98c
+  #   subnet_ids = tolist([aws_subnet.main.id, aws_subnet.main2.id])
+  #   security_group_ids = [aws_security_group.lb_sg.id]
+  # }
 
 
 

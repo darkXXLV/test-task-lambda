@@ -38,6 +38,12 @@ resource "aws_iam_role_policy" "i_am_s3_role_policy" {
   policy = file("s3_iam_policy.json")
 }
 
+resource "aws_iam_role_policy" "s3_lambda_policy2" {
+  name = "s3_lambda_policy2"
+  role = aws_iam_role.iam_for_lambda.id
+  policy = file("s3_lambda_poilcy.json")
+}
+
 data "aws_elb_service_account" "main" {}
 
 data "aws_iam_policy_document" "s3_bucket_lb_write" {
